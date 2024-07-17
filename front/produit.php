@@ -1,13 +1,14 @@
 
 <?php require_once '../include/database.php';
   
-  
    $sqlstate =  $pdo->prepare('SELECT * FROM produit  WHERE  id=?');
    $id = $_GET['id'];
-       $sqlstate->execute([$id]);
+  $sqlstate->execute([$id]);
    $produit =   $sqlstate->fetch();
  
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +21,13 @@
 </head>
 <body>
     
-<?php include '../include/navfront.php' ?>
+<?php include '../include/navfront.php' ;
+
+
+$idProduit = $produit['id'];
+$idUser =  $_SESSION ['user']['id'];
+$qty = isset($_SESSION['panier'][$idUser][$idProduit]) ? $_SESSION['panier'][$idUser][$idProduit] : 0;
+$button  =  $qty ==  0 ? 'Ajouter' : ' Modifier';?>
 <div class="container py-2"> 
   <div class="container"> 
     <div class="row">
@@ -55,15 +62,16 @@
 
         <div class="card-footer" style="z-index: 10;">
   <div class="counter d-flex">
-
-  <button type="button"   id="decrement"   class="btn btn-primary mx-1">-</button>
-    <input type="number"   id="numberInput"  class="form-control" value="1"   id = "qty" min="1">
-    <button type="button" id="increment" class="btn btn-primary mx-1">+</button>
- </div>
+  <form method = "post"  action = "ajouter_panier.php">
+  <?php include '../include/front/counter.php'; ?>
   </div> 
-        
+  </div>
 
-  <a href="" class="btn btn-primary" style="margin-top: 20px;">Ajouter au panier</a>
+
+        
+  <input type="submit" class=" btn btn-primary mx-1"  value =  <?php echo   $button ?> name =  "ajouter">
+
+  </form>
 
        
         
@@ -100,6 +108,6 @@
             }
         });
     });
-}); </script> 
+});</script> 
 </body>
 </html>

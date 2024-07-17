@@ -1,3 +1,4 @@
-<?php   
-var_dump($_POST)
-  ?>
+  <?php    session_start();
+
+  var_dump ($_SESSION['panier']);
+?>

@@ -1,4 +1,8 @@
-
+<?php   
+ session_start();
+ $idUser = $_SESSION ['user']['id'];
+$_SESSION ['panier'][$idUser];
+?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Ecommerce</a>
@@ -36,6 +40,6 @@
       </ul>
     </div>
     <a  class="btn float-end" href="panier.php">
-    <i class="fa-solid fa-cart-shopping"></i>  Panier</a>
+    <i class="fa-solid fa-cart-shopping"></i>  Panier (<?php   echo count( $_SESSION ['panier'][$idUser]);  ?>)</a>
   </div>
 </nav>
