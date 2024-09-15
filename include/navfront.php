@@ -1,7 +1,13 @@
 <?php   
  session_start();
+
+ if (!isset($_SESSION['user'])){
+  // Redirection vers la page de connexion si l'utilisateur n'est pas connecté
+  header('location:../connexion.php');
+  exit; // Arrête l'exécution du script après la redirection
+}
  $idUser = $_SESSION ['user']['id'];
-$_SESSION ['panier'][$idUser];
+
 ?>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
@@ -40,6 +46,7 @@ $_SESSION ['panier'][$idUser];
       </ul>
     </div>
     <a  class="btn float-end" href="panier.php">
-    <i class="fa-solid fa-cart-shopping"></i>  Panier (<?php   echo count( $_SESSION ['panier'][$idUser]);  ?>)</a>
+    <i class="fa-solid fa-cart-shopping"></i>  Panier (<?php   
+      ?>)</a>
   </div>
 </nav>

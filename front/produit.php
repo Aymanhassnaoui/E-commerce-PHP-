@@ -25,6 +25,8 @@
 
 
 $idProduit = $produit['id'];
+
+
 $idUser =  $_SESSION ['user']['id'];
 $qty = isset($_SESSION['panier'][$idUser][$idProduit]) ? $_SESSION['panier'][$idUser][$idProduit] : 0;
 $button  =  $qty ==  0 ? 'Ajouter' : ' Modifier';?>
